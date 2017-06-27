@@ -7,7 +7,9 @@ import { PeopleService } from "app/people.service";
   template: `
     <ul>
       <li *ngFor="let person of people">
+      <a [routerLink]="['/persons', person.id]">
         {{person.name}}
+      </a>
       </li>
     </ul>
   `,
@@ -16,11 +18,16 @@ import { PeopleService } from "app/people.service";
 export class PeopleListComponent implements OnInit {
 
   people: Person[] = [];
+  selectedPerson: Person;
   
   constructor(private _peopleService: PeopleService) {}
 
   ngOnInit() {
     this.people = this._peopleService.getAll();
+  }
+
+  selectPerson(person){
+    this.selectedPerson = person;
   }
 
 }
